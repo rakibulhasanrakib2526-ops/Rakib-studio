@@ -1,0 +1,11 @@
+import { FaWhatsapp, FaFacebookF, FaBehance, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
+const ICONS = { email: MdEmail, whatsapp: FaWhatsapp, facebook: FaFacebookF, behance: FaBehance, instagram: FaInstagram, youtube: FaYoutube };
+export default function Socials({ links }) {
+  if (!links.length) return null;
+  return (<div className="socials">{links.map((l) => {
+    const Icon = ICONS[l.platform];
+    const ext = !l.url.startsWith('mailto:');
+    return (<a key={l.id} className="soc" href={l.url} {...(ext ? { target: '_blank', rel: 'noopener noreferrer' } : {})}><Icon /> {l.label}</a>);
+  })}</div>);
+}
